@@ -1,8 +1,8 @@
 import css from "./Pagination.module.css";
+import ReactPaginate from "react-paginate";
 // import ReactPaginateModule from "react-paginate";
 // import { type ReactPaginateProps } from "react-paginate";
 // import { type ComponentType } from "react";
-import ReactPaginate from "react-paginate";
 
 // type ModuleWithDefault<T> = { default: T };
 
