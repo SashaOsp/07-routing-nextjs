@@ -6,10 +6,9 @@ import { fetchNotes } from "@/lib/api";
 import { useDebouncedCallback } from "use-debounce";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import NoteList from "@/components/NoteList/NoteList";
 import css from "./page.module.css";
-import Modal from "@/components/Modal/Modal";
+import Link from "next/link";
 
 type Props = {
   tag?: string;
@@ -18,9 +17,6 @@ type Props = {
 export default function NotesClient({ tag }: Props) {
   const [note, setNote] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
 
   const { data, isLoading } = useQuery({
     queryKey: ["notes", note, currentPage, tag],
@@ -47,14 +43,7 @@ export default function NotesClient({ tag }: Props) {
             onPageChange={setCurrentPage}
           />
         )}
-        <button onClick={openModal} className={css.button}>
-          Create note +
-        </button>
-        {isModalOpen && (
-          <Modal onClose={() => setIsModalOpen(false)}>
-            <NoteForm onClose={() => setIsModalOpen(false)} />
-          </Modal>
-        )}
+        <Link href="/notes/action/create">Create note +</Link>
       </header>
       {data && !isLoading && <NoteList notes={data.notes} />}
     </div>
